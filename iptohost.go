@@ -18,12 +18,12 @@ import (
 )
 
 const (
-	VERSION     = "1.2.1"
+	VERSION     = "1.2.2"
 	TOOL_NAME   = "iptohost"
 	BANNER      = `
  ┬┌─┐┌┬┐┌─┐┬ ┬┌─┐┌─┐┌┬┐
  │├─┘ │ │ │├─┤│ │└─┐ │ 
- ┴┴   ┴ └─┘┴ ┴└─┘└─┘ ┴  v%s
+ ┴┴   ┴ └─┘┴ ┴└─┘└─┘ ┴  v%s [BUG HUNTER EDITION]
 `
 )
 
@@ -345,6 +345,7 @@ func createResolver(config *Config) *net.Resolver {
 	}
 }
 
+// ==================== FIXED writeResult FUNCTION ====================
 func writeResult(w io.Writer, res Result, config *Config) {
 	if config.JSONOutput {
 		jsonData, _ := json.Marshal(res)
@@ -352,21 +353,23 @@ func writeResult(w io.Writer, res Result, config *Config) {
 	} else if config.Silent {
 		fmt.Fprintln(w, res.Hostname)
 	} else {
+		arrow := " ⇒ " // Fixed arrow as requested
+
 		if config.Timestamped && res.Timestamp != "" {
 			if res.Port != "" && res.Port != "443" {
-				fmt.Fprintf(w, "[%s] %s:%s -> %s [%s]\n", 
-					res.Type, res.IP, res.Port, res.Hostname, res.Timestamp)
+				fmt.Fprintf(w, "[%s] %s:%s%s%s [%s]\n",
+					res.Type, res.IP, res.Port, arrow, res.Hostname, res.Timestamp)
 			} else {
-				fmt.Fprintf(w, "[%s] %s -> %s [%s]\n", 
-					res.Type, res.IP, res.Hostname, res.Timestamp)
+				fmt.Fprintf(w, "[%s] %s%s%s [%s]\n",
+					res.Type, res.IP, arrow, res.Hostname, res.Timestamp)
 			}
 		} else {
 			if res.Port != "" && res.Port != "443" {
-				fmt.Fprintf(w, "[%s] %s:%s -> %s\n", 
-					res.Type, res.IP, res.Port, res.Hostname)
+				fmt.Fprintf(w, "[%s] %s:%s%s%s\n",
+					res.Type, res.IP, res.Port, arrow, res.Hostname)
 			} else {
-				fmt.Fprintf(w, "[%s] %s -> %s\n", 
-					res.Type, res.IP, res.Hostname)
+				fmt.Fprintf(w, "[%s] %s%s%s\n",
+					res.Type, res.IP, arrow, res.Hostname)
 			}
 		}
 	}
