@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/INTELEON404/Template/blob/main/iptohost.png" alt="iptohost Logo" />
+  <img src="https://github.com/loxray303/Template/blob/main/iptohost.png" alt="iptohost Logo" />
   
   ---
   [![Version](https://img.shields.io/badge/version-1.2.1-blue.svg)](https://github.com/inteleon404/iptohost)
