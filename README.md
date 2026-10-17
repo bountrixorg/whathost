@@ -1,19 +1,21 @@
 <div align="center">
-  <img src="https://github.com/loxray303/Template/blob/main/iptohost.png" alt="iptohost Logo" />
+<img width="311" height="58" alt="ascii-art-text" src="https://github.com/user-attachments/assets/e2eada1e-1a1a-44ef-bbbf-9df4082376fa" />
+
+
   
   ---
   [![Version](https://img.shields.io/badge/version-1.2.1-blue.svg)](https://github.com/inteleon404/iptohost)
   [![Go Version](https://img.shields.io/badge/go-%3E%3D1.18-00ADD8.svg)](https://golang.org/)
   [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-  [![Platform](https://img.shields.io/badge/platform-linux%20%7C%20macos%20%7C%20windows-lightgrey.svg)](https://github.com/inteleon404/iptohost)
+  [![Platform](https://img.shields.io/badge/platform-linux%20%7C%20macos%20%7C%20windows-lightgrey.svg)](https://github.com/bountrixorg/whathost)
 </div>
 
 
 ## 📖 About
 
-**iptohost** is a high-performance reconnaissance tool designed for security professionals, penetration testers, and bug bounty hunters. It rapidly resolves IP addresses to hostnames through SSL/TLS certificate inspection and DNS PTR lookups, providing comprehensive host enumeration for security assessments.
+**whathost** is a high-performance reconnaissance tool designed for security professionals, penetration testers, and bug bounty hunters. It rapidly resolves IP addresses to hostnames through SSL/TLS certificate inspection and DNS PTR lookups, providing comprehensive host enumeration for security assessments.
 
-### Why iptohost?
+### Why whathost?
 
 - 🚀 **Blazing Fast**: Multi-threaded architecture with configurable workers
 - 🎯 **Dual Discovery**: Combines SSL certificate analysis and DNS PTR lookups
@@ -65,20 +67,20 @@
 
 ### Using Go Install (Recommended)
 ```bash
-go install github.com/inteleon404/iptohost@latest
+go install github.com/bountrixorg/whathost@latest
 ```
 
 ### From Source
 ```bash
-git clone https://github.com/inteleon404/iptohost.git
-cd iptohost
-go build -o iptohost
-sudo mv iptohost /usr/local/bin/
+git clone https://github.com/bountrixorg/whathost.git
+cd whathost
+go build -o whathost
+sudo mv whathost /usr/local/bin/whathost
 ```
 
 ### Verify Installation
 ```bash
-iptohost -version
+whathost -version
 ```
 
 ---
@@ -89,59 +91,59 @@ iptohost -version
 
 **Quick scan from file:**
 ```bash
-iptohost -i targets.txt
+whathost -i targets.txt
 ```
 
 **Pipeline from stdin:**
 ```bash
-cat ips.txt | iptohost
+cat ips.txt | whathost
 ```
 
 **High-speed scan with 100 workers:**
 ```bash
-iptohost -i targets.txt -t 100
+whathost -i targets.txt -t 100
 ```
 
 ### Advanced Examples
 
 **Silent mode for clean output:**
 ```bash
-iptohost -i targets.txt -silent | sort -u
+whathost -i targets.txt -silent | sort -u
 ```
 
 **SSL-only enumeration (skip DNS):**
 ```bash
-iptohost -i targets.txt -skip-dns -t 200
+whathost -i targets.txt -skip-dns -t 200
 ```
 
 **DNS-only with custom resolver:**
 ```bash
-iptohost -i targets.txt -skip-ssl -r 8.8.8.8 -p 53
+whathost -i targets.txt -skip-ssl -r 8.8.8.8 -p 53
 ```
 
 **JSON output with statistics:**
 ```bash
-iptohost -i targets.txt -json -stats -dedupe > results.json
+whathost -i targets.txt -json -stats -dedupe > results.json
 ```
 
 **Rate-limited scan with delay:**
 ```bash
-iptohost -i targets.txt -delay 100ms -timeout 15
+whathost -i targets.txt -delay 100ms -timeout 15
 ```
 
 **Custom SNI for virtual hosts:**
 ```bash
-iptohost -i targets.txt -sni example.com -insecure
+whathost -i targets.txt -sni example.com -insecure
 ```
 
 **Verbose debugging:**
 ```bash
-iptohost -i targets.txt -v -stats
+whathost -i targets.txt -v -stats
 ```
 
 **Complete reconnaissance workflow:**
 ```bash
-cat targets.txt | iptohost -t 100 -dedupe -timestamp -o results.txt -stats
+cat targets.txt | whathost -t 100 -dedupe -timestamp -o results.txt -stats
 ```
 
 ---
@@ -258,34 +260,34 @@ api.example.com
 
 #### Discover subdomains from IP ranges
 ```bash
-cat ip-ranges.txt | iptohost -silent -dedupe | httprobe
+cat ip-ranges.txt | whathost -silent -dedupe | httprobe
 ```
 
 ### Penetration Testing
 
 #### Enumerate all hosts on discovered IPs
 ```bash
-iptohost -i scope-ips.txt -stats -o discovered-hosts.txt
+whathost -i scope-ips.txt -stats -o discovered-hosts.txt
 ```
 
 ### Asset Discovery
 
 #### Find all hostnames associated with company IPs
 ```bash
-iptohost -i company-ips.txt -json -dedupe > asset-inventory.json
+whathost -i company-ips.txt -json -dedupe > asset-inventory.json
 ```
 
 ### Certificate Transparency Analysis
 
 #### Extract all SANs from certificate monitoring
 ```bash
-cat ct-log-ips.txt | iptohost -skip-dns -t 200 -silent
+cat ct-log-ips.txt | whathost -skip-dns -t 200 -silent
 ```
 
 ### Reverse DNS Enumeration
 #### PTR record enumeration only
 ```bash
-iptohost -i targets.txt -skip-ssl -r 1.1.1.1 -v
+whathost -i targets.txt -skip-ssl -r 1.1.1.1 -v
 ```
 
 ---
@@ -327,22 +329,22 @@ http://10.0.0.1:8080
 
 **Combine with subfinder and httpx:**
 ```bash
-subfinder -d example.com -silent | httpx -silent | iptohost -silent | sort -u
+subfinder -d example.com -silent | httpx -silent | whathost -silent | sort -u
 ```
 
 **Pipe to nuclei for vulnerability scanning:**
 ```bash
-cat targets.txt | iptohost -silent -dedupe | nuclei -t cves/
+cat targets.txt | whathost -silent -dedupe | nuclei -t cves/
 ```
 
 **Chain with massdns:**
 ```bash
-cat subdomains.txt | massdns -r resolvers.txt -o S -w - | awk '{print $3}' | iptohost
+cat subdomains.txt | massdns -r resolvers.txt -o S -w - | awk '{print $3}' | whathost
 ```
 
 **Export to CSV:**
 ```bash
-iptohost -i targets.txt -json | jq -r '[.ip,.hostname,.type] | @csv'
+whathost -i targets.txt -json | jq -r '[.ip,.hostname,.type] | @csv'
 ```
 
 ---
@@ -353,21 +355,21 @@ iptohost -i targets.txt -json | jq -r '[.ip,.hostname,.type] | @csv'
 
 #### Maximum performance
 ```bash
-iptohost -i massive-list.txt -t 500 -timeout 5 -dns-timeout 3
+whathost -i massive-list.txt -t 500 -timeout 5 -dns-timeout 3
 ```
 
 ### For Rate-Limited Targets
 
 #### Gentle scanning
 ```bash
-iptohost -i targets.txt -t 10 -delay 500ms -timeout 20
+whathost -i targets.txt -t 10 -delay 500ms -timeout 20
 ```
 
 ### For Accuracy Over Speed
 
 #### Thorough scanning
 ```bash
-iptohost -i targets.txt -t 20 -timeout 30 -dns-timeout 10 -dedupe -stats
+whathost -i targets.txt -t 20 -timeout 30 -dns-timeout 10 -dedupe -stats
 ```
 
 ---
@@ -409,8 +411,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📧 Contact
 
 **INTELEON404** - [@inteleon404](https://github.com/inteleon404)
+**BOUNTRIX** - [@BOUNTRIX](https://github.com/bountrixorg)
 
-Project Link: [https://github.com/inteleon404/iptohost](https://github.com/inteleon404/iptohost)
+Project Link: [https://github.com/bountrixorg/whathost](https://github.com/bountrixorg/whathost)
 
 ---
 
