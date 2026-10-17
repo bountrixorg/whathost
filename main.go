@@ -19,11 +19,11 @@ import (
 
 const (
 	VERSION     = "1.2.2"
-	TOOL_NAME   = "iptohost"
+	TOOL_NAME   = "whathost"
 	BANNER      = `
- ┬┌─┐┌┬┐┌─┐┬ ┬┌─┐┌─┐┌┬┐
- │├─┘ │ │ │├─┤│ │└─┐ │ 
- ┴┴   ┴ └─┘┴ ┴└─┘└─┘ ┴  v%s [BUG HUNTER EDITION]
+▓ ▄  ▓ █▄▄▄  ▀▀▓ █▄▄  █▄▄▄ ▓▀▀▓ █▀▀  █▄▄ 
+█ █ ▄█ █  █ █▀▀█ █  ▄ █  █ █  █ ▀▀▀█ █  ▄
+▓▄█▄█  █  ▓ ▓▄▄▓ █▄▄▓ █  ▓ █▄▄▓ ▓▄▄▓ █▄▄▓ v%s [BUG HUNTER EDITION]
 `
 )
 
